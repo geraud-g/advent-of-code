@@ -1,3 +1,4 @@
+use crate::parse_input;
 use crate::utils::io::get_file;
 use itertools::Itertools;
 use std::collections::HashMap;
@@ -14,14 +15,14 @@ pub fn day_01() {
 
 fn get_input() -> (Vec<i32>, Vec<i32>) {
     let file = get_file("./src/day_01/input.txt");
-    let mut left_column = Vec::new();
-    let mut right_column = Vec::new();
-    for line in file.lines() {
-        let split = line.split_whitespace().collect::<Vec<_>>();
-        left_column.push(split[0].parse().unwrap());
-        right_column.push(split[1].parse().unwrap());
-    }
-    (left_column, right_column)
+    file.lines()
+        .map(|line| {
+            let mut split = line.split_whitespace();
+            let left: i32 = parse_input!(split.next().unwrap(), i32);
+            let right: i32 = parse_input!(split.next().unwrap(), i32);
+            (left, right)
+        })
+        .unzip()
 }
 
 fn part_one(left_column: &[i32], right_column: &[i32]) -> i32 {
