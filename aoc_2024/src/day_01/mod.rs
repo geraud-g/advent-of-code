@@ -4,7 +4,7 @@ use itertools::Itertools;
 use std::collections::HashMap;
 
 pub fn day_01() {
-    let (left_column, right_column) = get_input();
+    let (left_column, right_column) = get_input("./src/day_01/input.txt");
 
     let solution_1 = part_one(&left_column, &right_column);
     println!("\t- Solution 1 is : {solution_1}");
@@ -13,8 +13,8 @@ pub fn day_01() {
     println!("\t- Solution 2 is : {solution_2}");
 }
 
-fn get_input() -> (Vec<i32>, Vec<i32>) {
-    let file = get_file("./src/day_01/input.txt");
+fn get_input(file_name: &str) -> (Vec<i32>, Vec<i32>) {
+    let file = get_file(file_name);
     file.lines()
         .map(|line| {
             let mut split = line.split_whitespace();
@@ -44,4 +44,22 @@ fn part_two(left_column: &[i32], right_column: &[i32]) -> i32 {
         .iter()
         .map(|value| value * occurrences.get(value).unwrap_or(&0))
         .sum()
+}
+
+
+#[cfg(test)]
+mod tests {
+    use super::*;
+
+    #[test]
+    fn test_part_one() {
+        let (left_column, right_column) = get_input("./src/day_01/input_example.txt");
+        assert_eq!(11, part_one(&left_column, &right_column));
+    }
+
+    #[test]
+    fn test_part_two() {
+        let (left_column, right_column) = get_input("./src/day_01/input_example.txt");
+        assert_eq!(31, part_two(&left_column, &right_column));
+    }
 }

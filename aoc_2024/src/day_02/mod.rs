@@ -3,7 +3,7 @@ use crate::parse_input;
 use crate::utils::io::get_file;
 
 pub fn day_02() {
-    let inputs = get_input();
+    let inputs = get_input("./src/day_02/input.txt");
 
     let solution_1 = part_one(&inputs);
     println!("\t- Solution 1 is : {solution_1}");
@@ -12,8 +12,8 @@ pub fn day_02() {
     println!("\t- Solution 2 is : {solution_2}");
 }
 
-fn get_input() -> Vec<Vec<i16>> {
-    let file = get_file("./src/day_02/input.txt");
+fn get_input(file_name: &str) -> Vec<Vec<i16>> {
+    let file = get_file(file_name);
     file.lines()
         .map(|line| {
             line.split_whitespace()
@@ -68,4 +68,22 @@ fn is_valid_report_with_tolerance_of_one(report: &[i16]) -> bool {
         }
     }
     false
+}
+
+
+#[cfg(test)]
+mod tests {
+    use super::*;
+
+    #[test]
+    fn test_part_one() {
+        let inputs = get_input("./src/day_02/input_example.txt");
+        assert_eq!(2, part_one(&inputs));
+    }
+
+    #[test]
+    fn test_part_two() {
+        let inputs = get_input("./src/day_02/input_example.txt");
+        assert_eq!(4, part_two(&inputs));
+    }
 }
