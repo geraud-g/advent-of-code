@@ -36,7 +36,7 @@ Each solution resides in its respective directory under `src`.
 
 To run a specific day's code, such as day 01, you can use the command
 
-``` bash 
+``` bash
 cargo run 1
 ```
 

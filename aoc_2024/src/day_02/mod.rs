@@ -1,6 +1,6 @@
-use itertools::Itertools;
 use crate::parse_input;
 use crate::utils::io::get_file;
+use itertools::Itertools;
 
 pub fn day_02() {
     let inputs = get_input("./src/day_02/input.txt");
@@ -69,7 +69,6 @@ fn is_valid_report_with_tolerance_of_one(report: &[i16]) -> bool {
     }
     false
 }
-
 
 #[cfg(test)]
 mod tests {

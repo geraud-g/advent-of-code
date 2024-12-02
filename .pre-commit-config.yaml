@@ -1,0 +1,27 @@
+repos:
+  - repo: local
+    hooks:
+      - id: rustfmt
+        name: Rustfmt
+        entry: bash -c 'find . -name "Cargo.toml" -execdir cargo fmt \;'
+        language: system
+        pass_filenames: false
+
+      - id: clippy
+        name: Clippy
+        entry: bash -c 'find . -name "Cargo.toml" -execdir cargo clippy -- -D warnings \;'
+        language: system
+        pass_filenames: false
+
+      - id: cargo-check
+        name: Cargo Check
+        entry: bash -c 'find . -name "Cargo.toml" -execdir cargo check \;'
+        language: system
+        pass_filenames: false
+
+
+  - repo: https://github.com/pre-commit/pre-commit-hooks
+    rev: v5.0.0
+    hooks:
+      - id: end-of-file-fixer
+      - id: trailing-whitespace

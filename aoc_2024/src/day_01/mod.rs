@@ -46,7 +46,6 @@ fn part_two(left_column: &[i32], right_column: &[i32]) -> i32 {
         .sum()
 }
 
-
 #[cfg(test)]
 mod tests {
     use super::*;
