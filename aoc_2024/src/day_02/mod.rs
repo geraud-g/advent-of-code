@@ -76,13 +76,13 @@ mod tests {
 
     #[test]
     fn test_part_one() {
-        let inputs = get_input("./src/day_02/input_example.txt");
+        let inputs = get_input("./src/day_02/input_example_part_1.txt");
         assert_eq!(2, part_one(&inputs));
     }
 
     #[test]
     fn test_part_two() {
-        let inputs = get_input("./src/day_02/input_example.txt");
+        let inputs = get_input("./src/day_02/input_example_part_1.txt");
         assert_eq!(4, part_two(&inputs));
     }
 }

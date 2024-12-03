@@ -52,13 +52,13 @@ mod tests {
 
     #[test]
     fn test_part_one() {
-        let (left_column, right_column) = get_input("./src/day_01/input_example.txt");
+        let (left_column, right_column) = get_input("./src/day_01/input_example_part_1.txt");
         assert_eq!(11, part_one(&left_column, &right_column));
     }
 
     #[test]
     fn test_part_two() {
-        let (left_column, right_column) = get_input("./src/day_01/input_example.txt");
+        let (left_column, right_column) = get_input("./src/day_01/input_example_part_1.txt");
         assert_eq!(31, part_two(&left_column, &right_column));
     }
 }
