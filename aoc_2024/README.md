@@ -10,7 +10,7 @@ Each solution resides in its respective directory under `src`.
 | Day 02 |   ⭐️   |   ⭐    | [Day 02](src/day_02) |
 | Day 03 |   ⭐    |   ⭐    | [Day 03](src/day_03) |
 | Day 04 |   ⭐    |   ⭐    | [Day 04](src/day_04) |
-| Day 05 |   -    |   -    | [Day 05](src/day_05) |
+| Day 05 |   ⭐    |   ⭐    | [Day 05](src/day_05) |
 | Day 06 |   -    |   -    | [Day 06](src/day_06) |
 | Day 07 |   -    |   -    | [Day 07](src/day_07) |
 | Day 08 |   -    |   -    | [Day 08](src/day_08) |
