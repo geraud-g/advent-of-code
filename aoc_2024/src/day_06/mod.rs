@@ -1,4 +1,5 @@
 use crate::utils::io::get_file;
+use rayon::prelude::*;
 use std::collections::HashSet;
 
 #[derive(Debug, Clone, Copy, Eq, PartialEq, Hash)]
@@ -112,7 +113,7 @@ fn part_one(guard: &Guard, obstacles: &[Vec<bool>]) -> usize {
     hash_set.len()
 }
 
-fn does_loop(mut_guard: &Guard, obstacles: &[Vec<bool>], _initial_guard: &Guard) -> bool {
+fn does_loop(mut_guard: &Guard, obstacles: &[Vec<bool>]) -> bool {
     let mut guard_copy = mut_guard.clone();
     let mut visited = HashSet::new();
     visited.insert((guard_copy.position, guard_copy.direction));
@@ -126,8 +127,22 @@ fn does_loop(mut_guard: &Guard, obstacles: &[Vec<bool>], _initial_guard: &Guard)
     false
 }
 
+fn is_new_loop(pos: &Point, guard: &Guard, obstacles: &[Vec<bool>]) -> bool {
+    // Skip starting position
+    if *pos == guard.position {
+        return false;
+    }
+    let mut new_obstacles = obstacles.to_vec();
+    if !obstacles[pos.y][pos.x] {
+        new_obstacles[pos.y][pos.x] = true;
+        if does_loop(guard, &new_obstacles) {
+            return true;
+        }
+    }
+    false
+}
+
 fn part_two(guard: &Guard, obstacles: &[Vec<bool>]) -> usize {
-    let mut loop_count = 0;
     let mut visited_positions = HashSet::new();
     let mut guard_copy = guard.clone();
 
@@ -135,24 +150,10 @@ fn part_two(guard: &Guard, obstacles: &[Vec<bool>]) -> usize {
         visited_positions.insert(guard_copy.position);
     }
 
-    // Now, try placing an obstacle in each visited position that isn't the start
-    let mut new_obstacles = obstacles.to_vec();
-    for pos in &visited_positions {
-        if *pos == guard.position {
-            // Skip starting position
-            continue;
-        }
-        if !obstacles[pos.y][pos.x] {
-            // Temporarily place an obstacle
-            new_obstacles[pos.y][pos.x] = true;
-            if does_loop(&guard, &new_obstacles, &guard) {
-                loop_count += 1;
-            }
-            new_obstacles[pos.y][pos.x] = false;
-        }
-    }
-
-    loop_count
+    visited_positions
+        .par_iter()
+        .filter(|pos| is_new_loop(pos, guard, obstacles))
+        .count()
 }
 
 #[cfg(test)]
