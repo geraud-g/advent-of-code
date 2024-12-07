@@ -36,6 +36,9 @@ fn get_input(file_name: &str) -> Vec<Equation> {
 }
 
 fn is_solvable(target: i64, values: &[i64], accumulator: i64, use_concatenation: bool) -> bool {
+    if accumulator > target {
+        return false;
+    }
     match values {
         [] => accumulator == target,
         [next_value, rest @ ..] => {
@@ -45,8 +48,8 @@ fn is_solvable(target: i64, values: &[i64], accumulator: i64, use_concatenation:
                 || is_solvable(target, rest, accumulator * next_value, use_concatenation)
                 // Try concatenation if part_2
                 || (use_concatenation && {
-                let concatenation_str = format!("{}{}", accumulator, next_value);
-                let concatenation: i64 = concatenation_str.parse().expect("Invalid concatenation");
+                // From https://www.reddit.com/r/rust/comments/191l3ot/concatinate_two_numbers/
+                let concatenation = accumulator  * 10i64.pow(next_value.ilog10() + 1) + next_value;
                 is_solvable(target, rest, concatenation, use_concatenation)
             })
         }
