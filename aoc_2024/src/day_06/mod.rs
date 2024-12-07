@@ -52,6 +52,7 @@ impl Guard {
             Err(())
         }
     }
+
     fn rotate_right(&mut self) {
         self.direction = match self.direction {
             Direction::Up => Direction::Right,
