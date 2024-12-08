@@ -1,6 +1,6 @@
 use crate::utils::io::get_file;
 use itertools::Itertools;
-use std::collections::{HashMap, HashSet};
+use std::collections::HashMap;
 
 #[derive(Debug, Clone, Copy, PartialEq, Eq, Hash)]
 struct Map {
@@ -21,9 +21,7 @@ impl Map {
     /// https://en.wikipedia.org/wiki/Bresenham%27s_line_algorithm
     /// Generates all the points that form a straight line between `start` and `end`,
     /// extending the line in both forward and backward directions until it goes out of bounds.
-    fn trace_line(&self, start: Point, end: Point) -> HashSet<Point> {
-        let mut line_positions = HashSet::new();
-
+    fn insert_line_points(&self, line_positions: &mut Vec<Point>, start: Point, end: Point) {
         // Calculate the change (difference) in the x and y directions
         let delta_x = end.x as isize - start.x as isize;
         let delta_y = end.y as isize - start.y as isize;
@@ -43,7 +41,7 @@ impl Map {
             && forward_y >= 0
             && forward_y < self.height as isize
         {
-            line_positions.insert(Point {
+            line_positions.push(Point {
                 x: forward_x as usize,
                 y: forward_y as usize,
             });
@@ -61,15 +59,13 @@ impl Map {
             && backward_y >= 0
             && backward_y < self.height as isize
         {
-            line_positions.insert(Point {
+            line_positions.push(Point {
                 x: backward_x as usize,
                 y: backward_y as usize,
             });
             backward_x -= step_x;
             backward_y -= step_y;
         }
-
-        line_positions
     }
 
     fn mirrored_point(&self, point_a: &Point, point_b: &Point) -> Option<Point> {
@@ -87,7 +83,7 @@ impl Map {
     }
 }
 
-#[derive(Debug, Clone, Copy, PartialEq, Eq, Hash)]
+#[derive(Debug, Clone, Copy, PartialEq, Eq, Hash, Ord, PartialOrd)]
 struct Point {
     x: usize,
     y: usize,
@@ -125,29 +121,31 @@ fn get_input(file_name: &str) -> (Map, HashMap<char, Vec<Point>>) {
 }
 
 fn part_one(map: &Map, antennas: &HashMap<char, Vec<Point>>) -> usize {
-    let mut antinodes = HashSet::new();
+    let mut antinodes = vec![];
     for points in antennas.values() {
         for (point_a, point_b) in points.iter().tuple_combinations() {
             if let Some(mirrored_point) = map.mirrored_point(point_a, point_b) {
-                antinodes.insert(mirrored_point);
+                antinodes.push(mirrored_point);
             }
             if let Some(mirrored_point) = map.mirrored_point(point_b, point_a) {
-                antinodes.insert(mirrored_point);
+                antinodes.push(mirrored_point);
             }
         }
     }
+    antinodes.sort();
+    antinodes.dedup();
     antinodes.len()
 }
 
 fn part_two(map: &Map, antennas: &HashMap<char, Vec<Point>>) -> usize {
-    let mut antinodes = HashSet::new();
+    let mut antinodes = vec![];
     for (_antenna, points) in antennas.iter() {
         for (point_a, point_b) in points.iter().tuple_combinations() {
-            for point in map.trace_line(*point_a, *point_b) {
-                antinodes.insert(point);
-            }
+            map.insert_line_points(&mut antinodes, *point_a, *point_b)
         }
     }
+    antinodes.sort();
+    antinodes.dedup();
     antinodes.len()
 }
 
