@@ -41,8 +41,8 @@ pub fn day_13() {
     let solution_1 = part_one(&input);
     println!("\t- Solution 1 is : {solution_1}");
 
-    // let solution_2 = part_two(&input);
-    // println!("\t- Solution 2 is : {solution_2}");
+    let solution_2 = part_two(&input);
+    println!("\t- Solution 2 is : {solution_2}");
 }
 
 fn get_machine(text: &str) -> Machine {
@@ -74,54 +74,34 @@ fn get_input(file_name: &str) -> Vec<Machine> {
     let split_separator = format!("{}{}", LINE_ENDING, LINE_ENDING);
     get_file(file_name)
         .split(&split_separator)
-        .map(|chunk| get_machine(chunk))
+        .map(get_machine)
         .collect()
 }
 
-fn calculate_buttons_press_nbr(machine: &Machine) -> Option<(usize, usize)> {
-    let xa = machine.button_a.x;
-    let xb = machine.button_b.x;
-    let ya = machine.button_a.y;
-    let yb = machine.button_b.y;
-    let xp = machine.prize.x;
-    let yp = machine.prize.y;
+fn calculate_buttons_press_nbr(machine: &Machine, part_two: bool) -> Option<(usize, usize)> {
+    let xa = machine.button_a.x as i64;
+    let xb = machine.button_b.x as i64;
+    let ya = machine.button_a.y as i64;
+    let yb = machine.button_b.y as i64;
+    let mut xp = machine.prize.x as i64;
+    let mut yp = machine.prize.y as i64;
 
-    // Construct the matrix m
-    let _m = [[xa, xb], [ya, yb]];
-
-    // Calculate the determinant of m
-    let det = (xa * yb) - (xb * ya);
-
-    // Check if the matrix is singular
-    if det.abs() < 1e-10 {
-        return None; // Matrix is singular or nearly singular
+    if part_two {
+        xp += 10000000000000;
+        yp += 10000000000000;
     }
 
-    // Calculate the inverse of m by dividing each element by det
-    let m_inv = [[yb / det, -xb / det], [-ya / det, xa / det]];
+    let det = xa * yb - xb * ya;
 
-    // Prize vector
-    let p = [xp, yp];
+    if (xp * yb - xb * yp) % det != 0 || (xa * yp - ya * xp) % det != 0 {
+        return None;
+    }
 
-    // Calculate the vector of button presses
-    let q_a = m_inv[0][0] * p[0] + m_inv[0][1] * p[1];
-    let q_b = m_inv[1][0] * p[0] + m_inv[1][1] * p[1];
+    let a = (xp * yb - xb * yp) / det;
+    let b = (xa * yp - ya * xp) / det;
 
-    let epsilon = 1e-6;
-
-    // Check if q_a and q_b are close enough to integers
-    let q_a_round = q_a.round();
-    let q_b_round = q_b.round();
-
-    // Ensure that the rounded values are within the allowed range
-    if (q_a - q_a_round).abs() <= epsilon
-        && (q_b - q_b_round).abs() <= epsilon
-        && q_a_round >= 0.0
-        && q_b_round >= 0.0
-        && q_a_round <= 100.0
-        && q_b_round <= 100.0
-    {
-        Some((q_a_round as usize, q_b_round as usize))
+    if a >= 0 && b >= 0 {
+        Some((a as usize, b as usize))
     } else {
         None
     }
@@ -130,7 +110,18 @@ fn calculate_buttons_press_nbr(machine: &Machine) -> Option<(usize, usize)> {
 fn part_one(machines: &[Machine]) -> usize {
     let mut total = 0;
     for machine in machines {
-        if let Some((button_a_press, button_b_press)) = calculate_buttons_press_nbr(machine) {
+        if let Some((button_a_press, button_b_press)) = calculate_buttons_press_nbr(machine, false)
+        {
+            total += (button_a_press * 3) + button_b_press;
+        }
+    }
+    total
+}
+
+fn part_two(machines: &[Machine]) -> usize {
+    let mut total = 0;
+    for machine in machines {
+        if let Some((button_a_press, button_b_press)) = calculate_buttons_press_nbr(machine, true) {
             total += (button_a_press * 3) + button_b_press;
         }
     }
@@ -143,13 +134,13 @@ mod tests {
 
     #[test]
     fn test_part_one() {
-        // let input = get_input("./src/day_13/input_example.txt");
-        // assert_eq!(1930, part_one(&input));
+        let input = get_input("./src/day_13/input_example.txt");
+        assert_eq!(480, part_one(&input));
     }
 
-    // #[test]
-    // fn test_part_two() {
-    //     let input = get_input("./src/day_13/input_example.txt");
-    //     assert_eq!(1306, part_two(&input));
-    // }
+    #[test]
+    fn test_part_two() {
+        let input = get_input("./src/day_13/input_example.txt");
+        assert_eq!(875318608908, part_two(&input));
+    }
 }
