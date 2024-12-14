@@ -93,17 +93,13 @@ fn calculate_buttons_press_nbr(machine: &Machine, part_two: bool) -> Option<(usi
 
     let det = xa * yb - xb * ya;
 
-    if (xp * yb - xb * yp) % det != 0 || (xa * yp - ya * xp) % det != 0 {
-        return None;
-    }
-
     let a = (xp * yb - xb * yp) / det;
     let b = (xa * yp - ya * xp) / det;
 
-    if a >= 0 && b >= 0 {
-        Some((a as usize, b as usize))
-    } else {
+    if (a * xa + b * xb) != xp || (a * ya + b * yb) != yp {
         None
+    } else {
+        Some((a as usize, b as usize))
     }
 }
 
