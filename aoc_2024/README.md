@@ -20,7 +20,7 @@ Each solution resides in its respective directory under `src`.
 | Day 12 |   ⭐    |   -    | [Day 12](src/day_12) |
 | Day 13 |   ⭐    |   ⭐    | [Day 13](src/day_13) |
 | Day 14 |   ⭐    |   ⭐    | [Day 14](src/day_14) |
-| Day 15 |   -    |   -    | [Day 15](src/day_15) |
+| Day 15 |   ⭐    |   -    | [Day 15](src/day_15) |
 | Day 16 |   -    |   -    | [Day 16](src/day_16) |
 | Day 17 |   -    |   -    | [Day 17](src/day_17) |
 | Day 18 |   -    |   -    | [Day 18](src/day_18) |
