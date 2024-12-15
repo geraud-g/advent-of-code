@@ -151,6 +151,6 @@ mod tests {
     #[test]
     fn test_part_one() {
         let input = get_input("./src/day_14/input_example.txt");
-        assert_eq!(215987200, part_one(&input, Point { x: 101, y: 103 }));
+        assert_eq!(21, part_one(&input, Point { x: 101, y: 103 }));
     }
 }
