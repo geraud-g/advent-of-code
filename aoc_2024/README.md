@@ -1,4 +1,4 @@
-# Advent of Code 2022
+# Advent of Code 2024
 
 This repository contains my solutions for [Advent of Code 2024](https://adventofcode.com/2024) implemented in Rust.
 
