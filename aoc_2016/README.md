@@ -23,8 +23,8 @@ Each solution resides in its respective directory .
 | Day 15 |   ⭐    |   ⭐    | [Day 15](day_15) |
 | Day 16 |   ⭐    |   ⭐    | [Day 16](day_16) |
 | Day 17 |   ⭐    |   ⭐    | [Day 17](day_17) |
-| Day 18 |   -    |   -    | [Day 18](day_18) |
-| Day 19 |   -    |   -    | [Day 19](day_19) |
+| Day 18 |   ⭐    |   ⭐    | [Day 18](day_18) |
+| Day 19 |   ⭐    |   ⭐    | [Day 19](day_19) |
 | Day 20 |   -    |   -    | [Day 20](day_20) |
 | Day 21 |   -    |   -    | [Day 21](day_21) |
 | Day 22 |   -    |   -    | [Day 22](day_22) |
