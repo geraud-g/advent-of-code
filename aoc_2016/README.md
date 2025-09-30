@@ -25,7 +25,7 @@ Each solution resides in its respective directory .
 | Day 17 |   ⭐    |   ⭐    | [Day 17](day_17) |
 | Day 18 |   ⭐    |   ⭐    | [Day 18](day_18) |
 | Day 19 |   ⭐    |   ⭐    | [Day 19](day_19) |
-| Day 20 |   -    |   -    | [Day 20](day_20) |
+| Day 20 |   ⭐    |   ⭐    | [Day 20](day_20) |
 | Day 21 |   -    |   -    | [Day 21](day_21) |
 | Day 22 |   -    |   -    | [Day 22](day_22) |
 | Day 23 |   -    |   -    | [Day 23](day_23) |
