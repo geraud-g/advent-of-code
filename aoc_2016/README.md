@@ -30,7 +30,7 @@ Each solution resides in its respective directory .
 | Day 22 |   ⭐    |   ⭐    | [Day 22](day_21) |
 | Day 23 |   ⭐    |   ⭐    | [Day 23](day_23) |
 | Day 24 |   ⭐    |   ⭐    | [Day 24](day_24) |
-| Day 25 |   -    |   -    | [Day 25](day_25) |
+| Day 25 |   ⭐    |   ⭐    | [Day 25](day_25) |
 
 ## Running the Code
 
