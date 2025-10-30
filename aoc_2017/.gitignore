@@ -1,0 +1,4 @@
+src/
+build/
+.env
+node_modules/
