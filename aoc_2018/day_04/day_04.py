@@ -2,7 +2,6 @@ import re
 from collections import defaultdict
 from dataclasses import dataclass
 from datetime import datetime, timedelta
-from typing import List
 
 
 @dataclass(frozen=True)
@@ -32,10 +31,10 @@ RE_FALLS = re.compile(r"^\[(\d{4})-(\d{2})-(\d{2}) (\d{2}):(\d{2})\] falls aslee
 RE_WAKES = re.compile(r"^\[(\d{4})-(\d{2})-(\d{2}) (\d{2}):(\d{2})\] wakes up$")
 
 
-def parse_input(filename: str) -> List[Record]:
+def parse_input(filename: str) -> list[Record]:
     events: list[Record] = []
 
-    with open(filename, "r", encoding="utf-8") as f:
+    with open(filename, encoding="utf-8") as f:
         for raw in f:
             line = raw.strip()
             if not line:

@@ -15,7 +15,7 @@ def part_one(boxes: list[str]) -> int:
 
 def part_two(boxes: list[str]) -> str:
     for box_a, box_b in combinations(boxes, 2):
-        diff_letters = sum(1 for x, y in zip(box_a, box_b) if x != y)
+        diff_letters = sum(1 for x, y in zip(box_a, box_b, strict=False) if x != y)
         if diff_letters == 1:
             return "".join(c for c in box_a if c in box_b)
     raise ValueError("Can't find a solution for part two")

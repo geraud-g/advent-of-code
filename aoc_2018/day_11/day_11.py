@@ -36,7 +36,7 @@ def part_one(serial_number: int) -> str:
     max_power = float("-inf")
     coords = None
     for y, row in enumerate(grid):
-        for x, cell in enumerate(row):
+        for x in range(len(row)):
             power = get_power_range_3(grid, y, x)
             if power > max_power:
                 max_power = power
@@ -74,7 +74,7 @@ def part_two(serial_number: int) -> str:
     max_power = float("-inf")
     coords = None
     for y, row in enumerate(grid):
-        for x, cell in enumerate(row):
+        for x in range(len(row)):
             power, square_size = get_power_range_and_size(grid, y, x)
             if power > max_power:
                 max_power = power

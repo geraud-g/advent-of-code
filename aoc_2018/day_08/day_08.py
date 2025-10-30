@@ -1,3 +1,4 @@
+import contextlib
 from dataclasses import dataclass, field
 
 
@@ -53,10 +54,8 @@ def get_metadata_sum_part_2(node: Node) -> int:
         return sum(node.metadata_list)
     metadata_sum = 0
     for metadata in node.metadata_list:
-        try:
+        with contextlib.suppress(IndexError):
             metadata_sum += get_metadata_sum_part_2(node.children[metadata - 1])
-        except IndexError:
-            pass
     return metadata_sum
 
 

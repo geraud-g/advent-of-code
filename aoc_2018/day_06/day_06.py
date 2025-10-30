@@ -37,7 +37,7 @@ def part_one(points: list[Point]) -> int:
         for x in range(min_x, max_x + 1):
             closest_point = get_closest_point_id(points, y, x)
             distances[closest_point] += 1
-            if y == max_y or x == max_x or y == min_y or x == min_x:
+            if y in (max_y, min_y) or x in (max_x, min_x):
                 to_exclude.add(closest_point)
 
     return max(value for key, value in distances.items() if key not in to_exclude)
