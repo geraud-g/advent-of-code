@@ -1,0 +1,25 @@
+[package]
+name = "advent_of_code_2020"
+version = "0.1.0"
+authors = ["ster"]
+edition = "2018"
+
+# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
+[lib]
+name = "aoc_2020"
+path = "src/lib.rs"
+
+
+[dependencies]
+itertools = "0.9.0"
+regex = "1.4.2"
+lazy_static = "1.4.0"
+ring-algorithm = "0.2.2"
+fnv = "1.0.7"
+
+[dev-dependencies]
+criterion = "0.3"
+
+[[bench]]
+name = "bench_main"
+harness = false
