@@ -18,19 +18,7 @@ Each solution resides in its respective directory.
 | Day 10 |        |        | [Day 10](day_10) |
 | Day 11 |        |        | [Day 11](day_11) |
 | Day 12 |        |        | [Day 12](day_12) |
-| Day 13 |        |        | [Day 13](day_13) |
-| Day 14 |        |        | [Day 14](day_14) |
-| Day 15 |        |        | [Day 15](day_15) |
-| Day 16 |        |        | [Day 16](day_16) |
-| Day 17 |        |        | [Day 17](day_17) |
-| Day 18 |        |        | [Day 18](day_18) |
-| Day 19 |        |        | [Day 19](day_19) |
-| Day 20 |        |        | [Day 20](day_20) |
-| Day 21 |        |        | [Day 21](day_21) |
-| Day 22 |        |        | [Day 22](day_22) |
-| Day 23 |        |        | [Day 23](day_23) |
-| Day 24 |        |        | [Day 24](day_24) |
-| Day 25 |        |        | [Day 25](day_25) |
+
 
 ## Running the Code
 

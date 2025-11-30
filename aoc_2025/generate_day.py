@@ -65,8 +65,8 @@ if __name__ == "__main__":
     parser.add_argument(
         "day",
         type=int,
-        help="Day number (1-25)",
-        choices=range(1, 26),
+        help="Day number (1-12)",
+        choices=range(1, 13),
     )
     args = parser.parse_args()
     generate_day(args.day)
