@@ -11,6 +11,7 @@ This repository contains my solutions for [Advent of Code](https://adventofcode.
 | [2018](https://adventofcode.com/2018) | Python | [aoc_2018](aoc_2018) |
 | [2020](https://adventofcode.com/2020) | Rust | [aoc_2020](aoc_2020) |
 | [2024](https://adventofcode.com/2024) | Rust | [aoc_2024](aoc_2024) |
+| [2025](https://adventofcode.com/2025) | Python | [aoc_2025](aoc_2025) |
 
 ## About Advent of Code
 
