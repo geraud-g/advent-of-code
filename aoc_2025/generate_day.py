@@ -13,7 +13,7 @@ def generate_day(day: int):
 
     # Create Python file
     python_file = day_dir / f"day_{day_str}.py"
-    python_template = f'''def part_one(data):
+    python_template = """def part_one(data):
     pass
 
 
@@ -29,16 +29,16 @@ def parse_input(filename: str):
 def main():
     data = parse_input("input_part_1.txt")
     result_1 = part_one(data)
-    print(f"Result part 1: {{result_1}}")
+    print(f"Result part 1: {result_1}")
 
     data = parse_input("input_part_2.txt")
     result_2 = part_two(data)
-    print(f"Result part 2: {{result_2}}")
+    print(f"Result part 2: {result_2}")
 
 
 if __name__ == "__main__":
     main()
-'''
+"""
     python_file.write_text(python_template)
     print(f"Created file: {python_file}")
 
@@ -52,8 +52,8 @@ if __name__ == "__main__":
     print(f"Created file: {input_part_2}")
 
     print(f"\nDay {day_str} structure generated successfully!")
-    print(f"Next steps:")
-    print(f"  1. Add your input to input_part_1.txt and input_part_2.txt")
+    print("Next steps:")
+    print("  1. Add your input to input_part_1.txt and input_part_2.txt")
     print(f"  2. Implement part_one() and part_two() in day_{day_str}.py")
     print(f"  3. Run with: cd day_{day_str} && uv run day_{day_str}.py")
 
