@@ -8,7 +8,7 @@ Each solution resides in its respective directory.
 |--------|:------:|:------:|------------------|
 | Day 01 |   ⭐️   |   ⭐    | [Day 01](day_01) |
 | Day 02 |   ⭐️   |   ⭐    | [Day 02](day_02) |
-| Day 03 |        |        | [Day 03](day_03) |
+| Day 03 |   ⭐️   |   ⭐    | [Day 03](day_03) |
 | Day 04 |        |        | [Day 04](day_04) |
 | Day 05 |        |        | [Day 05](day_05) |
 | Day 06 |        |        | [Day 06](day_06) |
@@ -18,7 +18,6 @@ Each solution resides in its respective directory.
 | Day 10 |        |        | [Day 10](day_10) |
 | Day 11 |        |        | [Day 11](day_11) |
 | Day 12 |        |        | [Day 12](day_12) |
-
 
 ## Running the Code
 
