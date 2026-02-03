@@ -1,7 +1,6 @@
 use crate::utils::get_file;
-use std::collections::{HashSet, HashMap};
 use itertools::max;
-
+use std::collections::{HashMap, HashSet};
 
 pub fn day_10() {
     let input = get_input();
@@ -13,14 +12,12 @@ pub fn day_10() {
     println!("Part B: {}", solution_b);
 }
 
-
 fn get_input() -> HashSet<i64> {
     get_file("./inputs/day_10.txt")
         .lines()
         .map(|line| line.parse::<i64>().unwrap())
         .collect()
 }
-
 
 pub fn solve_part_a(numbers: &HashSet<i64>, counter: Counter) -> Option<i64> {
     if counter.numbers_processed == numbers.len() {
@@ -45,13 +42,11 @@ pub fn solve_part_a(numbers: &HashSet<i64>, counter: Counter) -> Option<i64> {
     None
 }
 
-
 fn solve_part_b(numbers: &HashSet<i64>) -> i64 {
     let max_val = max(numbers);
     let mut new_cache: HashMap<i64, i64> = HashMap::new();
     rec(&numbers, &mut new_cache, *max_val.unwrap())
 }
-
 
 fn rec(numbers: &HashSet<i64>, cache: &mut HashMap<i64, i64>, current_number: i64) -> i64 {
     if current_number == 0 {
@@ -71,7 +66,6 @@ fn rec(numbers: &HashSet<i64>, cache: &mut HashMap<i64, i64>, current_number: i6
     }
     counter
 }
-
 
 #[derive(Debug, Default)]
 pub struct Counter {

@@ -1,14 +1,12 @@
 use crate::utils::{get_file, LINE_ENDING};
-use std::collections::VecDeque;
-use std::collections::hash_map::DefaultHasher;
-use std::hash::{Hash, Hasher};
 use fnv::FnvHashSet;
-
+use std::collections::hash_map::DefaultHasher;
+use std::collections::VecDeque;
+use std::hash::{Hash, Hasher};
 
 const PLAYER_A_WON: bool = true;
 
 type Deck = VecDeque<usize>;
-
 
 pub fn day_22() {
     let (mut player_1, mut player_2) = get_input();
@@ -20,16 +18,23 @@ pub fn day_22() {
     println!("Part B: {}", solution_b);
 }
 
-
 fn get_input() -> (Deck, Deck) {
     let players: Vec<String> = get_file("./inputs/day_22.txt")
-        .split(&format!("{}{}", LINE_ENDING, LINE_ENDING)).map(|l| l.to_string())
+        .split(&format!("{}{}", LINE_ENDING, LINE_ENDING))
+        .map(|l| l.to_string())
         .collect();
-    let player1 = players[0].lines().skip(1).map(|l| l.parse().unwrap()).collect();
-    let player2 = players[1].lines().skip(1).map(|l| l.parse().unwrap()).collect();
+    let player1 = players[0]
+        .lines()
+        .skip(1)
+        .map(|l| l.parse().unwrap())
+        .collect();
+    let player2 = players[1]
+        .lines()
+        .skip(1)
+        .map(|l| l.parse().unwrap())
+        .collect();
     (player1, player2)
 }
-
 
 fn solve_part_a(deck_player_a: &mut Deck, deck_player_b: &mut Deck) -> usize {
     while !deck_player_a.is_empty() && !deck_player_b.is_empty() {
@@ -51,7 +56,6 @@ fn solve_part_a(deck_player_a: &mut Deck, deck_player_b: &mut Deck) -> usize {
     }
 }
 
-
 fn solve_part_b(deck_player_a: &mut Deck, deck_player_b: &mut Deck) -> usize {
     solve_part_b_rec(deck_player_a, deck_player_b);
     if deck_player_a.is_empty() {
@@ -60,7 +64,6 @@ fn solve_part_b(deck_player_a: &mut Deck, deck_player_b: &mut Deck) -> usize {
         get_score(deck_player_a)
     }
 }
-
 
 fn solve_part_b_rec(deck_player_a: &mut Deck, deck_player_b: &mut Deck) -> bool {
     let mut past_rounds = FnvHashSet::default();
@@ -71,7 +74,6 @@ fn solve_part_b_rec(deck_player_a: &mut Deck, deck_player_b: &mut Deck) -> bool 
         }
         let card_a = deck_player_a.pop_front().unwrap();
         let card_b = deck_player_b.pop_front().unwrap();
-
 
         let player_won = if card_a <= deck_player_a.len() && card_b <= deck_player_b.len() {
             let mut new_deck_a = deck_player_a.iter().take(card_a).cloned().collect();
@@ -91,7 +93,6 @@ fn solve_part_b_rec(deck_player_a: &mut Deck, deck_player_b: &mut Deck) -> bool 
     deck_player_b.is_empty()
 }
 
-
 fn get_game_hash(player_a: &Deck, player_b: &Deck) -> u64 {
     let mut s = DefaultHasher::new();
     player_a.hash(&mut s);
@@ -99,7 +100,10 @@ fn get_game_hash(player_a: &Deck, player_b: &Deck) -> u64 {
     s.finish()
 }
 
-
 fn get_score(player: &Deck) -> usize {
-    player.iter().enumerate().map(|(idx, card)| card * (player.len() - idx)).sum()
+    player
+        .iter()
+        .enumerate()
+        .map(|(idx, card)| card * (player.len() - idx))
+        .sum()
 }

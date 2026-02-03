@@ -1,4 +1,3 @@
-use aoc_2020::{day_01, day_11, day_12, day_13, day_15, day_16, day_17, day_18, day_19, day_21, day_22};
 use aoc_2020::day_02;
 use aoc_2020::day_03;
 use aoc_2020::day_04;
@@ -8,17 +7,23 @@ use aoc_2020::day_07;
 use aoc_2020::day_08;
 use aoc_2020::day_09;
 use aoc_2020::day_10;
+use aoc_2020::{
+    day_01, day_11, day_12, day_13, day_15, day_16, day_17, day_18, day_19, day_21, day_22,
+};
 use std::env;
-
 
 fn main() {
     let args: Vec<String> = env::args().collect();
     match args.len() {
-        2 => solve_day(args[1].trim().parse().expect("You must enter a number between 1 and 25.")),
-        _ => panic!("You must enter a number between 1 and 25.")
+        2 => solve_day(
+            args[1]
+                .trim()
+                .parse()
+                .expect("You must enter a number between 1 and 25."),
+        ),
+        _ => panic!("You must enter a number between 1 and 25."),
     }
 }
-
 
 fn solve_day(day: i32) {
     let fn_day = match day {
@@ -47,7 +52,7 @@ fn solve_day(day: i32) {
         23 => unimplemented!(),
         24 => unimplemented!(),
         25 => unimplemented!(),
-        _ => panic!("{} is not a valid value", day)
+        _ => panic!("{} is not a valid value", day),
     };
     println!("# Processing Day {} :", day);
     fn_day()

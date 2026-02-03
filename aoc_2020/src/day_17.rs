@@ -1,6 +1,5 @@
-use std::collections::{HashMap, HashSet};
 use crate::utils::get_file;
-
+use std::collections::{HashMap, HashSet};
 
 pub fn day_17() {
     let input = get_input();
@@ -12,35 +11,38 @@ pub fn day_17() {
     println!("Part B: {}", solution_b);
 }
 
-
 fn get_input() -> HashMap<Point, bool> {
     let mut points = HashMap::new();
     for (y, line) in get_file("./inputs/day_17.txt").lines().enumerate() {
         for (x, value) in line.chars().enumerate() {
             let active = value.eq(&'#');
-            points.insert(Point {
-                x: x as i64,
-                y: y as i64,
-                z: 0,
-                w: 0,
-            }, active);
+            points.insert(
+                Point {
+                    x: x as i64,
+                    y: y as i64,
+                    z: 0,
+                    w: 0,
+                },
+                active,
+            );
         }
     }
     points
 }
 
-
 fn solve(points: &HashMap<Point, bool>, part_b: bool) -> i64 {
     let mut points: HashMap<Point, bool> = points.clone();
 
     for _ in 0..6 {
-        let points_to_eval: HashSet<Point> = points.iter()
+        let points_to_eval: HashSet<Point> = points
+            .iter()
             .filter(|(_, &is_active)| is_active)
             .map(|p| p.0.get_neighbours(part_b).to_vec())
             .flatten()
             .collect();
 
-        points = points_to_eval.iter()
+        points = points_to_eval
+            .iter()
             .filter(|&p| is_active(part_b, p, &points))
             .map(|p| (*p, true))
             .collect();
@@ -48,10 +50,11 @@ fn solve(points: &HashMap<Point, bool>, part_b: bool) -> i64 {
     points.values().filter(|&&p| p).count() as i64
 }
 
-
 fn is_active(part_b: bool, point: &Point, current_points: &HashMap<Point, bool>) -> bool {
     let state = current_points.get(point).unwrap_or(&false);
-    let active_neighbours = point.get_neighbours(part_b).iter()
+    let active_neighbours = point
+        .get_neighbours(part_b)
+        .iter()
         .filter(|n| *current_points.get(n).unwrap_or(&false))
         .count();
     if *state {
@@ -61,7 +64,6 @@ fn is_active(part_b: bool, point: &Point, current_points: &HashMap<Point, bool>)
     }
 }
 
-
 #[derive(Debug, Hash, Eq, PartialEq, Copy, Clone, Default)]
 struct Point {
     x: i64,
@@ -69,7 +71,6 @@ struct Point {
     z: i64,
     w: i64,
 }
-
 
 impl Point {
     fn get_neighbours(&self, part_b: bool) -> Box<[Point]> {

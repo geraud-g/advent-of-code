@@ -1,6 +1,5 @@
-use regex::Regex;
 use crate::utils::get_file;
-
+use regex::Regex;
 
 pub fn day_02() {
     let input = get_input();
@@ -11,7 +10,6 @@ pub fn day_02() {
     let solution_b = input.iter().filter(|p| p.is_valid_part_b()).count();
     println!("Part B: {}", solution_b);
 }
-
 
 fn get_input() -> Vec<Password> {
     let data = get_file("./inputs/day_02.txt");
@@ -31,14 +29,12 @@ fn get_input() -> Vec<Password> {
     passwords
 }
 
-
 struct Password {
     min: usize,
     max: usize,
     letter: String,
     password: String,
 }
-
 
 impl Password {
     pub fn is_valid_part_a(&self) -> bool {

@@ -1,13 +1,11 @@
 use crate::utils::{get_file, LINE_ENDING};
-use regex::Regex;
 use lazy_static::lazy_static;
+use regex::Regex;
 use std::collections::HashMap;
-
 
 lazy_static! {
     static ref REGEX_VALUE: Regex = Regex::new(r####"(\d+): "(\w+)""####).unwrap();
 }
-
 
 #[test]
 fn test() {
@@ -28,7 +26,6 @@ fn is_valid(rules: &HashMap<usize, Node>, input: &str) -> bool {
         false
     }
 }
-
 
 fn eval(rules: &HashMap<usize, Node>, input: &str, current_rule: &Node) -> Option<usize> {
     if input.is_empty() {
@@ -57,7 +54,6 @@ fn eval(rules: &HashMap<usize, Node>, input: &str, current_rule: &Node) -> Optio
     None
 }
 
-
 fn get_input() -> (HashMap<usize, Node>, Vec<String>) {
     let mut nodes = HashMap::new();
     let parts: Vec<String> = get_file("./inputs/day_19.txt")
@@ -84,7 +80,11 @@ fn get_node(line: &str) -> Node {
     let splitted: Vec<&str> = line.split(':').collect();
     let mut rules_list = vec![];
     for str_rule in splitted[1].split('|') {
-        let rules: Vec<usize> = str_rule.split(' ').filter(|&p| !p.eq("")).map(|s| s.parse().unwrap()).collect();
+        let rules: Vec<usize> = str_rule
+            .split(' ')
+            .filter(|&p| !p.eq(""))
+            .map(|s| s.parse().unwrap())
+            .collect();
         rules_list.push(rules);
     }
     Node {

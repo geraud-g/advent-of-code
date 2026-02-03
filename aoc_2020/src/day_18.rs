@@ -1,6 +1,5 @@
 use crate::utils::get_file;
 
-
 pub fn day_18() {
     let input = get_input();
 
@@ -11,11 +10,11 @@ pub fn day_18() {
     println!("Part B: {}", solution_b);
 }
 
-
 fn get_input() -> Vec<Vec<Token>> {
     let mut token_lines = vec![];
     for line in get_file("./inputs/day_18.txt").lines() {
-        let token_line = line.replace("(", " ( ")
+        let token_line = line
+            .replace("(", " ( ")
             .replace(")", " ) ")
             .split(' ')
             .filter(|x| !x.eq(&""))
@@ -24,13 +23,13 @@ fn get_input() -> Vec<Vec<Token>> {
                 ")" => Token::RightBracket,
                 "+" => Token::Add,
                 "*" => Token::Mul,
-                val => Token::Value(val.parse().unwrap())
-            }).collect();
+                val => Token::Value(val.parse().unwrap()),
+            })
+            .collect();
         token_lines.push(token_line);
     }
     token_lines
 }
-
 
 fn eval(tokens: &[Token], get_opp_idx: fn(&[(usize, &Token)]) -> usize) -> u64 {
     // Remove useless brackets
@@ -51,7 +50,9 @@ fn eval(tokens: &[Token], get_opp_idx: fn(&[(usize, &Token)]) -> usize) -> u64 {
     for (idx, token) in tokens.iter().enumerate() {
         match token {
             Token::Add | Token::Mul => {
-                if bracket == 0 { tokens_with_idx.push((idx, token)) }
+                if bracket == 0 {
+                    tokens_with_idx.push((idx, token))
+                }
             }
             Token::RightBracket => bracket += 1,
             Token::LeftBracket => bracket -= 1,
@@ -67,7 +68,6 @@ fn eval(tokens: &[Token], get_opp_idx: fn(&[(usize, &Token)]) -> usize) -> u64 {
     )
 }
 
-
 fn get_end_bracket_idx(tokens: &[Token]) -> usize {
     let mut bracket_end_idx = 0;
     let mut open_bracket = 0;
@@ -75,9 +75,7 @@ fn get_end_bracket_idx(tokens: &[Token]) -> usize {
     for token in tokens {
         bracket_end_idx += 1;
         match token {
-            Token::LeftBracket => {
-                open_bracket += 1
-            }
+            Token::LeftBracket => open_bracket += 1,
             Token::RightBracket => {
                 open_bracket -= 1;
                 if open_bracket == 0 {
@@ -90,11 +88,9 @@ fn get_end_bracket_idx(tokens: &[Token]) -> usize {
     bracket_end_idx
 }
 
-
 fn get_opp_index_part_a(tokens_with_idx: &[(usize, &Token)]) -> usize {
     tokens_with_idx.last().unwrap().0
 }
-
 
 fn get_opp_index_part_b(tokens_with_idx: &[(usize, &Token)]) -> usize {
     if let Some((idx, _)) = tokens_with_idx.iter().find(|(_, &t)| t.eq(&Token::Mul)) {
@@ -106,7 +102,6 @@ fn get_opp_index_part_b(tokens_with_idx: &[(usize, &Token)]) -> usize {
     unreachable!()
 }
 
-
 #[derive(Debug, Eq, PartialEq, Copy, Clone)]
 enum Token {
     LeftBracket,
@@ -116,12 +111,11 @@ enum Token {
     Value(u64),
 }
 
-
 impl Token {
     fn get_value(&self) -> u64 {
         match &self {
             Token::Value(val) => *val,
-            _ => panic!("Tried to get value from : {:?}", &self)
+            _ => panic!("Tried to get value from : {:?}", &self),
         }
     }
 
@@ -129,7 +123,7 @@ impl Token {
         match &self {
             Token::Add => value_a + value_b,
             Token::Mul => value_a * value_b,
-            _ => panic!("Tried to compute value from : {:?}", &self)
+            _ => panic!("Tried to compute value from : {:?}", &self),
         }
     }
 }

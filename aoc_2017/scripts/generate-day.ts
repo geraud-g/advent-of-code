@@ -4,7 +4,7 @@ import * as path from 'path';
 function generateDay(dayNumber: number) {
   const dayString = dayNumber.toString().padStart(2, '0');
   const dayDir = path.join('src', `day_${dayString}`);
-  
+
   // Create directory if it doesn't exist
   if (!fs.existsSync(dayDir)) {
     fs.mkdirSync(dayDir, { recursive: true });
@@ -13,7 +13,7 @@ function generateDay(dayNumber: number) {
     console.log(`Directory already exists: ${dayDir}`);
     return;
   }
-  
+
   // Create index.ts with boilerplate
   const indexContent = `export const part_1 = (input: string): number => {
   // TODO: Implement part 1
@@ -25,16 +25,16 @@ export const part_2 = (input: string): number => {
   return 0;
 }
 `;
-  
+
   const indexPath = path.join(dayDir, 'index.ts');
   fs.writeFileSync(indexPath, indexContent);
   console.log(`Created: ${indexPath}`);
-  
+
   // Create empty input.txt
   const inputPath = path.join(dayDir, 'input.txt');
   fs.writeFileSync(inputPath, '');
   console.log(`Created: ${inputPath}`);
-  
+
   console.log(`\nDay ${dayNumber} boilerplate generated successfully!`);
 }
 

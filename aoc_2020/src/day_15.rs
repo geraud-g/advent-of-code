@@ -10,7 +10,6 @@ pub fn day_15() {
     assert_eq!(37312, solution_b)
 }
 
-
 fn solve(numbers: &[usize], repeat: usize) -> usize {
     let mut last_spoken = *numbers.last().unwrap();
     let mut spoken_numbers: Vec<Option<Number>> = (0..50_000_000).map(|_| None).collect();
@@ -31,23 +30,24 @@ fn solve(numbers: &[usize], repeat: usize) -> usize {
     last_spoken
 }
 
-
 #[derive(Debug, Hash, Copy, Clone)]
 struct Number {
     last_turn: usize,
     last_turn_before: Option<usize>,
 }
 
-
 impl Number {
     fn new(value: usize) -> Self {
-        Number { last_turn: value, last_turn_before: None }
+        Number {
+            last_turn: value,
+            last_turn_before: None,
+        }
     }
 
     fn get_next_number(&self) -> usize {
         match self.last_turn_before {
             Some(value) => self.last_turn - value,
-            None => 0
+            None => 0,
         }
     }
 
