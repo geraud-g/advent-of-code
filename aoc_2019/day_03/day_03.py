@@ -1,3 +1,4 @@
+import sys
 from dataclasses import dataclass
 
 
@@ -21,7 +22,7 @@ def part_one(path_a: list[Point], path_b: list[Point]) -> int:
 
 def part_two(path_a: list[Point], path_b: list[Point]) -> int:
     intersections = (set(path_a) & set(path_b)) ^ {Point(0, 0)}
-    min_distance = float("inf")
+    min_distance = sys.maxsize
     for point in intersections:
         distance = path_a.index(point) + path_b.index(point)
         min_distance = min(min_distance, distance)
