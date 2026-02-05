@@ -32,16 +32,16 @@ def get_path_from_line(line: str) -> list[Point]:
     origin = Point(0, 0)
     last_point = origin
     points = [origin]
+    deltas = {
+        "U": (0, -1),
+        "D": (0, 1),
+        "L": (-1, 0),
+        "R": (1, 0),
+    }
 
     for move in line.split(","):
         direction = move[0]
         distance = int(move[1:])
-        deltas = {
-            "U": (0, -1),
-            "D": (0, 1),
-            "L": (-1, 0),
-            "R": (1, 0),
-        }
         delta_x, delta_y = deltas[direction]
         for _ in range(distance):
             new_point = Point(last_point.x + delta_x, last_point.y + delta_y)
